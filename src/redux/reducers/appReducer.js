@@ -4,6 +4,7 @@ const initState = {
     test: 'Chao em Long Chip' ,
     homeData: []
 }
+// Hàm xử lý acions 
 const appReducer = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.GET_HOME:
