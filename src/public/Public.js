@@ -6,7 +6,7 @@ import { SidebarRight } from '~/components/SidebarRight';
 
 function Public() {
     return (
-        <div className="flex w-full bg-[#CED9D9]">
+        <div className="flex w-full min-h-screen bg-[#CED9D9]">
             <div className="flex-none w-[240px] bg-[#DDE4E4]">
                 <SidebarLeft />
             </div>

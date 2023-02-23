@@ -1,11 +1,19 @@
 import { ToastContainer } from 'react-toastify';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
 
 import { Public, Home, Login } from '~/public/index';
 import 'react-toastify/dist/ReactToastify.css';
 import path from './utils/path';
+import * as actions from '~/redux/actions';
 
 function App() {
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(actions.getHome());
+    });
+
     return (
         <>
             <div>
