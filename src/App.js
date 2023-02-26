@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-import { Public, Home, Login } from '~/public/index';
+import { Public, Home, Login, Personal, Album } from '~/public/index';
 import 'react-toastify/dist/ReactToastify.css';
 import path from './utils/path';
 import * as actions from '~/redux/actions';
@@ -21,6 +21,8 @@ function App() {
                     <Route path={path.PUBLIC} element={<Public />}>
                         <Route path={path.HOME} element={<Home />} />
                         <Route path={path.LOGIN} element={<Login />} />
+                        <Route path={path.MYMUSIC} element={<Personal />} />
+                        <Route path={path.ALBUM_TITLE_PID} element={<Album />} />
                     </Route>
                 </Routes>
             </div>

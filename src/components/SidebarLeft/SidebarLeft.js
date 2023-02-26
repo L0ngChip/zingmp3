@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import images from '~/assets';
 import { Menu } from './Menu';
@@ -8,9 +8,9 @@ import path from '~/utils/path';
 
 function SidebarLeft() {
     return (
-        <div>
-            <div className="w-full h-[70px] flex pl-[25px] pr-[28px] justify-start items-center ">
-                <Link>
+        <div className="flex h-full flex-col bg-main-200">
+            <div className="w-full h-[70px] pl-[25px] pr-[28px] justify-start items-center ">
+                <Link to={path.HOME}>
                     <img src={images.logo} alt="" className="w-[120px] object-cover " to={path.HOME} />
                 </Link>
             </div>

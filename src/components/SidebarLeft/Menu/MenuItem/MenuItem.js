@@ -5,7 +5,7 @@ const activeStyle = 'flex px-[25px] py-2 gap-[10px] text-sm font-bold items-cent
 
 function MenuItem({ icon, to, title, iconRight }) {
     return (
-        <div className="flex flex-col">
+        <div className="flex flex-col hover:bg-main-100">
             <NavLink className={(nav) => (nav.isActive ? activeStyle : notActiveStyle)} to={to}>
                 <span>{icon}</span>
                 <span>{title}</span>

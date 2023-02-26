@@ -1,16 +1,20 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getArrSlider } from '~/utils/fn';
 import { SlArrowLeft, SlArrowRight } from 'react-icons/sl';
 
 import { Button } from '~/components/Button';
+import * as actions from '~/redux/actions';
 
 var intervalId;
 function Slider() {
-    const { banner } = useSelector((state) => state.app);
+    const { banner, isPlay } = useSelector((state) => state.app);
     const [isAuto, setIsAuto] = useState(true);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(2);
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     //animation for banner
     useEffect(() => {
@@ -70,6 +74,18 @@ function Slider() {
         [min, max],
     );
 
+    const handleClickBanner = (item) => {
+        if (item.type === 1) {
+            dispatch(actions.setCurSongId(item.encodeId));
+            dispatch(actions.play(true));
+        }
+        if (item.type === 4) {
+            const albumPath = item?.link.split('.')[0];
+            console.log(albumPath);
+            navigate(albumPath);
+        }
+    };
+
     return (
         <div className="overflow-hidden w-full px-[59px] mb-5 relative">
             <Button
@@ -90,6 +106,7 @@ function Slider() {
                         key={item.encodeId}
                         src={item.banner}
                         alt=""
+                        onClick={() => handleClickBanner(item)}
                         className={`slider-item flex-1 object-contain rounded-lg w-[30%] ${
                             index <= 2 ? 'block' : 'hidden'
                         }`}
