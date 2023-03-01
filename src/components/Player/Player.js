@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect, useRef } from 'react';
 import {
     BsHeart,
     BsThreeDots,
@@ -13,15 +13,18 @@ import { CiRepeat } from 'react-icons/ci';
 
 import * as apis from '~/apis';
 import { Button } from '../Button';
+import * as actions from '~/redux/actions';
 
 function Player() {
-    const audioEls = new Audio('');
+    const audioEls = useRef(new Audio());
     const { curSongId, isPlaying } = useSelector((state) => state.music);
     const [infoSong, setInfoSong] = useState(null);
     const [source, setSource] = useState(null);
+    const dispatch = useDispatch();
+
     useEffect(() => {
         const fetchDetailSong = async () => {
-            const [res1, res2] = await Promise.all([apis.apisGetSong(curSongId), apis.apisGetDetailSong(curSongId)]);
+            const [res1, res2] = await Promise.all([apis.apisGetDetailSong(curSongId), apis.apisGetSong(curSongId)]);
             if (res1.data.err === 0) {
                 setInfoSong(res1.data.data);
             }
@@ -34,16 +37,25 @@ function Player() {
     }, [curSongId]);
 
     useEffect(() => {
-        // audioEls.play();
-    }, [curSongId]);
+        audioEls.current.pause();
+        audioEls.current.src = source;
+        audioEls.current.load();
+        if (isPlaying) audioEls.current.play();
+    }, [curSongId, source]);
 
     const handleTogglePlay = () => {
-        // setIsPlaying((prev) => !prev);
+        if (isPlaying) {
+            audioEls.current.pause();
+            dispatch(actions.play(false));
+        } else {
+            audioEls.current.play();
+            dispatch(actions.play(true));
+        }
     };
     return (
         <div className="flex h-full px-5 bg-main-400 ">
             <div className="flex items-center w-[30%] border border-red-300 gap-[10px]">
-                <img src={infoSong?.thumbnail} alt="thumbnail-song" className="w-16 h-16 object-cover" />
+                <img src={infoSong?.thumbnail} alt="" className="w-16 h-16 object-cover" />
                 <div>
                     <div className="text-sm font-medium mb-[1px] text-[#32323d]">
                         <span>{infoSong?.title}</span>
