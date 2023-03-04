@@ -20,9 +20,8 @@ function Album() {
 
         fetchDetailPlayList();
     }, [pid]);
-    console.log(playlistData?.song?.total);
     return (
-        <Scrollbars style={{ width: '100%', height: '70%' }}>
+        <Scrollbars style={{ width: '100%', height: '78%' }}>
             <div className="flex w-full gap-8 px-[59px] mb-[30px] border border-red-400">
                 <div className="flex flex-col w-1/4 border border-blue-500 pb-[30px]">
                     <img className="w-full object-contain" src={playlistData?.thumbnailM} alt="thumbnails" />

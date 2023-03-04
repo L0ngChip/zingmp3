@@ -9,7 +9,7 @@ import * as actions from '~/redux/actions';
 
 var intervalId;
 function Slider() {
-    const { banner, isPlay } = useSelector((state) => state.app);
+    const { banner } = useSelector((state) => state.app);
     const [isAuto, setIsAuto] = useState(true);
     const [min, setMin] = useState(0);
     const [max, setMax] = useState(2);
@@ -81,7 +81,6 @@ function Slider() {
         }
         if (item.type === 4) {
             const albumPath = item?.link.split('.')[0];
-            console.log(albumPath);
             navigate(albumPath);
         }
     };

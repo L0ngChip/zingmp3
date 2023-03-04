@@ -9,9 +9,9 @@ import path from '~/utils/path';
 function SidebarLeft() {
     return (
         <div className="flex h-full flex-col bg-main-200">
-            <div className="w-full h-[70px] pl-[25px] pr-[28px] justify-start items-center ">
+            <div className="flex w-full h-[70px] pl-[25px] pr-[28px] justify-start items-center">
                 <Link to={path.HOME}>
-                    <img src={images.logo} alt="" className="w-[120px] object-cover " to={path.HOME} />
+                    <img src={images.logo} alt="" className="flex w-[120px] object-cover" to={path.HOME} />
                 </Link>
             </div>
             <div>
