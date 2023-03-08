@@ -1,3 +1,5 @@
+import { RotatingLines } from 'react-loader-spinner';
+
 export const LabraryMusic = ({ width = '1.25rem', height = '1.25rem', className }) => {
     return (
         <svg width={width} height={height} className={className} viewBox="0 0 20 20" fill="currentColor">
@@ -70,4 +72,8 @@ export const LiveIcon = ({ width = '2rem', height = '1rem', className }) => {
             />
         </svg>
     );
+};
+
+export const LoadingSong = () => {
+    return <RotatingLines strokeColor="grey" strokeWidth="5" animationDuration="0.75" width="30" visible={true} />;
 };
