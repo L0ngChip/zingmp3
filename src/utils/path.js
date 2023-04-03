@@ -8,6 +8,7 @@ const path = {
     follow: '/follow',
     ALBUM_TITLE_PID: '/album/:title/:pid',
     PLAYLIST_TITLE_PID: '/playlist/:title/:pid',
+    WEEKCHART_TITLE_PID: '/zing-chart-tuan/:title/:pid',
 };
 
 export default path;

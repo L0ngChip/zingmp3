@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
 import { Public, Home, Login, Personal, Album } from '~/public/index';
+import { WeekChart } from './components/WeekChart';
 import 'react-toastify/dist/ReactToastify.css';
 import path from './utils/path';
 import * as actions from '~/redux/actions';
@@ -24,6 +25,7 @@ function App() {
                         <Route path={path.MYMUSIC} element={<Personal />} />
                         <Route path={path.ALBUM_TITLE_PID} element={<Album />} />
                         <Route path={path.PLAYLIST_TITLE_PID} element={<Album />} />
+                        <Route path={path.WEEKCHART_TITLE_PID} element={<WeekChart />} />
                     </Route>
                 </Routes>
             </div>

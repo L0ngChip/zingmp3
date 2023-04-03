@@ -154,7 +154,7 @@ function Player({ setShowSidebar }) {
     };
     return (
         <div className="flex h-full px-5 bg-main-400 ">
-            <div className="flex items-center w-[30%] border border-red-300 gap-[10px]">
+            <div className="flex items-center w-[30%] gap-[10px]">
                 <img src={infoSong?.thumbnail} alt="" className="w-16 h-16 object-cover" />
                 <div>
                     <div className="text-sm font-medium mb-[1px] text-[#32323d]">
@@ -230,7 +230,7 @@ function Player({ setShowSidebar }) {
                     <span className="">{moment.utc(infoSong?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
-            <div className="w-[30%] flex justify-end items-center border border-red-300">
+            <div className="w-[30%] flex justify-end items-center">
                 <div
                     className="flex gap-2 items-center"
                     onMouseEnter={() => setIsHoverVolume(true)}

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import moment from 'moment/moment';
 import { Scrollbars } from 'react-custom-scrollbars-2';
@@ -15,9 +15,13 @@ function Album() {
     const { pid } = useParams();
     const [playlistData, setPlaylistData] = useState({});
     const dispatch = useDispatch();
+    const location = useLocation();
+
     useEffect(() => {
         const fetchDetailPlayList = async () => {
+            dispatch(actions.loading(true));
             const response = await apis.apisGetDetailPlaylist(pid);
+            dispatch(actions.loading(false));
             if (response?.data.err === 0) {
                 setPlaylistData(response.data?.data);
                 dispatch(actions.setPlaylist(response?.data?.data?.song?.items));
@@ -26,8 +30,17 @@ function Album() {
 
         fetchDetailPlayList();
     }, [pid]);
+
+    useEffect(() => {
+        if (location.state?.playAlbum) {
+            const randomSong = Math.round(Math.random() * playlistData?.song?.items?.length) - 1;
+            dispatch(actions.setCurSongId(playlistData?.song?.items[randomSong]?.encodeId));
+            dispatch(actions.play(true));
+        }
+    }, [pid, playlistData]);
+
     return (
-        <Scrollbars style={{ width: '100%', height: '78%' }}>
+        <Scrollbars style={{ width: '100%', height: '100%' }}>
             <div className="flex w-full gap-8 px-[59px] mb-[30px] border border-red-400">
                 <div className="flex flex-col w-1/4 pb-[30px]">
                     <div className="w-full relative">
