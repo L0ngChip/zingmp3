@@ -7,7 +7,6 @@ import { Slider } from '~/components/Slider';
 
 function Home() {
     const { newReleaseChart, top100, womenMusic, weekChart, favoriteArtist } = useSelector((state) => state.app);
-    console.log(favoriteArtist);
     return (
         <div className="overflow-y-auto w-full">
             <Slider className="" />

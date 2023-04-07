@@ -2,12 +2,15 @@ import actionTypes from '../actions/actionTypes';
 
 const initState = {
     curSongId: null,
+    curSongData: null,
+    curAlbumId: null,
     isPlaying: false,
     atAlbum: false,
     songs: null,
+    recentSongs: [],
 };
 // Hàm xử lý song
-const songReducer = (state = initState, action) => {
+const musicReducer = (state = initState, action) => {
     switch (action.type) {
         case actionTypes.GET_CUR_SONG_ID:
             return {
@@ -29,10 +32,35 @@ const songReducer = (state = initState, action) => {
                 ...state,
                 songs: action.songs || null,
             };
-
+        case actionTypes.SET_CUR_SONG_DATA:
+            return {
+                ...state,
+                curSongData: action.data || null,
+            };
+        case actionTypes.SET_CUR_ALBUM_ID:
+            return {
+                ...state,
+                curAlbumId: action.pid || null,
+            };
+        case actionTypes.SET_RECENT:
+            let songs = state.recentSongs;
+            if (action.data) {
+                if (state.recentSongs.some((i) => i.sid === action.data.sid)) {
+                    songs = songs.filter((i) => i.sid !== action.data.sid - 1);
+                }
+                if (songs.length > 20) {
+                    songs = songs.filter((i, index, self) => index !== self.length - 1);
+                }
+                songs = [action.data, ...songs];
+            }
+            return {
+                ...state,
+                recentSongs: songs,
+            };
+        //? [action.data, ...state.recentSongs] : state.recentSongs
         default:
             return state;
     }
 };
 
-export default songReducer;
+export default musicReducer;

@@ -1,15 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect, useRef } from 'react';
-import {
-    BsHeart,
-    BsThreeDots,
-    BsFillSkipStartFill,
-    BsFillSkipEndFill,
-    BsFillPlayFill,
-    BsPauseFill,
-    BsMusicNoteList,
-} from 'react-icons/bs';
+import { BsHeart, BsThreeDots, BsFillSkipStartFill, BsFillSkipEndFill, BsFillPlayFill, BsPauseFill, BsMusicNoteList } from 'react-icons/bs';
 import { RiRepeatOneFill } from 'react-icons/ri';
 import { RxShuffle } from 'react-icons/rx';
 import { CiRepeat } from 'react-icons/ci';
@@ -37,12 +29,14 @@ function Player({ setShowSidebar }) {
     const thumbRef = useRef();
     const trackRef = useRef();
     const volumeRef = useRef();
+
     useEffect(() => {
         setIsLoadedSong(false);
         const fetchDetailSong = async () => {
             const [res1, res2] = await Promise.all([apis.apisGetDetailSong(curSongId), apis.apisGetSong(curSongId)]);
             if (res1.data.err === 0) {
                 setInfoSong(res1.data.data);
+                dispatch(actions.setCurSongData(res1.data.data));
             }
             setIsLoadedSong(true);
             if (res2.data.err === 0) {
@@ -182,9 +176,7 @@ function Player({ setShowSidebar }) {
                     </Button>
                     <Button
                         onClick={handlePrevSong}
-                        className={`${
-                            !songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'
-                        }`}
+                        className={`${!songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'}`}
                     >
                         <BsFillSkipStartFill size={24} />
                     </Button>
@@ -192,19 +184,11 @@ function Player({ setShowSidebar }) {
                         className="p-1 mx-[7px] cursor-pointer border border-gray-700 rounded-full hover:text-main-500 hover:border-main-500"
                         onClick={handleTogglePlay}
                     >
-                        {!isLoadedSong ? (
-                            <LoadingSong />
-                        ) : isPlaying ? (
-                            <BsPauseFill size={30} />
-                        ) : (
-                            <BsFillPlayFill size={30} />
-                        )}
+                        {!isLoadedSong ? <LoadingSong /> : isPlaying ? <BsPauseFill size={30} /> : <BsFillPlayFill size={30} />}
                     </Button>
                     <Button
                         onClick={handleNextSong}
-                        className={`${
-                            !songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'
-                        }`}
+                        className={`${!songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'}`}
                     >
                         <BsFillSkipEndFill size={24} />
                     </Button>
@@ -222,27 +206,16 @@ function Player({ setShowSidebar }) {
                         onClick={handleProgressBar}
                         ref={trackRef}
                     >
-                        <div
-                            ref={thumbRef}
-                            className="absolute top-0 bottom-0 left-0 rounded-l-full rounded-r-full bg-[#0e8080]"
-                        ></div>
+                        <div ref={thumbRef} className="absolute top-0 bottom-0 left-0 rounded-l-full rounded-r-full bg-[#0e8080]"></div>
                     </div>
                     <span className="">{moment.utc(infoSong?.duration * 1000).format('mm:ss')}</span>
                 </div>
             </div>
             <div className="w-[30%] flex justify-end items-center">
-                <div
-                    className="flex gap-2 items-center"
-                    onMouseEnter={() => setIsHoverVolume(true)}
-                    onMouseLeave={() => setIsHoverVolume(false)}
-                >
+                <div className="flex gap-2 items-center" onMouseEnter={() => setIsHoverVolume(true)} onMouseLeave={() => setIsHoverVolume(false)}>
                     <span>{+volume === 0 ? <SlVolumeOff /> : <SlVolume2 />}</span>
 
-                    <div
-                        className={`w-[130px] h-1 bg-white rounded-l-full rounded-r-full ${
-                            isHoverVolume ? 'hidden' : 'relative'
-                        } `}
-                    >
+                    <div className={`w-[130px] h-1 bg-white rounded-l-full rounded-r-full ${isHoverVolume ? 'hidden' : 'relative'} `}>
                         <div ref={volumeRef} className="absolute left-0 bottom-0 top-0 bg-main-500"></div>
                     </div>
                     <input

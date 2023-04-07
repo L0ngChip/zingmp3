@@ -36,7 +36,7 @@ function Public() {
                     <div className="flex-none h-[90px]"></div>
                 </div>
                 {showSidebar && (
-                    <div className="flex-none w-[330px] border border-green-500 bg-main-300 animate-slide-left">
+                    <div className="flex-none h-screen w-[330px] border bg-main-300 animate-slide-left">
                         <SidebarRight />
                     </div>
                 )}

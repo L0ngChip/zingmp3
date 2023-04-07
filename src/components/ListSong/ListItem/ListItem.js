@@ -15,6 +15,14 @@ function ListItem({ songData }) {
                 dispatch(actions.setCurSongId(songData?.encodeId));
                 dispatch(actions.play(true));
                 dispatch(actions.playAlbum(true));
+                dispatch(
+                    actions.setRecent({
+                        thumbnail: songData?.thumbnail,
+                        title: songData?.title,
+                        artistsNames: songData?.artistsNames,
+                        sid: songData?.encodeId,
+                    }),
+                );
             }}
         >
             <div className="flex flex-1 items-center gap-2">

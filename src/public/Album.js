@@ -18,6 +18,7 @@ function Album() {
     const location = useLocation();
 
     useEffect(() => {
+        dispatch(actions.setCurAlbumId(pid));
         const fetchDetailPlayList = async () => {
             dispatch(actions.loading(true));
             const response = await apis.apisGetDetailPlaylist(pid);
@@ -46,9 +47,7 @@ function Album() {
                     <div className="w-full relative">
                         <img
                             className={`w-full object-contain ${
-                                isPlaying
-                                    ? 'rounded-full animate-rotate-center'
-                                    : 'rounded-lg animate-rotate-center-pause'
+                                isPlaying ? 'rounded-full animate-rotate-center' : 'rounded-lg animate-rotate-center-pause'
                             }`}
                             src={playlistData?.thumbnailM}
                             alt="thumbnails"

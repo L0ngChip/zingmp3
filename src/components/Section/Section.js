@@ -3,10 +3,9 @@ import { SectionItem } from './SectionItem';
 
 function Section({ data }) {
     return (
-        <div className="flex flex-col w-full px-[59px] mt-12 ">
-            <div className="flex items-center mb-5">
+        <div className="flex flex-col w-full px-[59px] mt-12">
+            <div className="flex items-center justify-between mb-5">
                 <h3 className="capitalize font-bold text-xl">{data?.title}</h3>
-                <span className="text-xs">Tất cả</span>
             </div>
             <div className="flex gap-7">
                 {data &&
