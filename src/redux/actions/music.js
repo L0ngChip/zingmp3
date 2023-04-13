@@ -1,4 +1,5 @@
 import actionTypes from './actionTypes';
+import * as apis from '~/apis';
 
 export const setCurSongId = (sid) => ({
     type: actionTypes.GET_CUR_SONG_ID,
@@ -35,3 +36,28 @@ export const setRecent = (data) => ({
     type: actionTypes.SET_RECENT,
     data,
 });
+export const search = (keyword) => async (dispatch) => {
+    try {
+        const response = await apis.apisSearch(keyword);
+        if (response.data.err === 0) {
+            dispatch({ type: actionTypes.SEARCH, data: response.data.data, keyword });
+        } else {
+            dispatch({ type: actionTypes.SEARCH, data: null });
+        }
+    } catch (error) {
+        dispatch({ type: actionTypes.SEARCH, data: null });
+    }
+};
+export const getSearchSongs = (singerId) => async (dispatch) => {
+    try {
+        const response = await apis.apisGetArtistSong(singerId);
+        console.log(response);
+        if (response.data.err === 0) {
+            dispatch({ type: actionTypes.PLAYLIST, songs: response.data.data?.items });
+        } else {
+            dispatch({ type: actionTypes.PLAYLIST, songs: null });
+        }
+    } catch (error) {
+        dispatch({ type: actionTypes.PLAYLIST, data: null });
+    }
+};

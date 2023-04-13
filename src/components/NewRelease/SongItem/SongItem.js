@@ -2,7 +2,7 @@ import moment from 'moment';
 import { useDispatch } from 'react-redux';
 import * as actions from '~/redux/actions';
 
-function SongItem({ thumbnail, title, artistsNames, sid, releaseDate, style, sm, smItem }) {
+function SongItem({ thumbnail, title, artistsNames, sid, releaseDate, style, size, smItem }) {
     const dispatch = useDispatch();
     return (
         <div
@@ -15,11 +15,7 @@ function SongItem({ thumbnail, title, artistsNames, sid, releaseDate, style, sm,
             }}
         >
             <div className="flex gap-1">
-                <img
-                    src={thumbnail}
-                    alt="thumbnail"
-                    className={`object-cover rounded-md cursor-pointer ${sm ? 'w-[40px] h-[40px]' : 'w-[60px] h-[60px]'}`}
-                />
+                <img src={thumbnail} alt="thumbnail" className={`object-cover rounded-md cursor-pointer ${size || 'w-[60px] h-[60px]'}`} />
                 <div className="flex flex-col ml-[10px] text-xs font-normal">
                     <span className="text-sm font-medium ">{title?.length >= 26 ? `${title?.slice(0, 26)}...` : title}</span>
                     <span className="text-xs opacity-70">{artistsNames?.length >= 26 ? `${artistsNames?.slice(0, 26)}...` : artistsNames}</span>

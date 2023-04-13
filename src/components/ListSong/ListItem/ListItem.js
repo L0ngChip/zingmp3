@@ -5,12 +5,12 @@ import moment from 'moment';
 
 import * as actions from '~/redux/actions';
 
-function ListItem({ songData }) {
+function ListItem({ songData, isHideNode }) {
     const dispatch = useDispatch();
 
     return (
         <div
-            className="flex w-full justify-between items-cen1ter p-[10px] border-b border-[#0000000d] hover:bg-[#ffffff4d] cursor-pointer"
+            className="flex w-full justify-between items-cen1ter p-[10px] border-b border-[#0000000d] rounded-md hover:bg-[#ffffff4d] cursor-pointer"
             onClick={() => {
                 dispatch(actions.setCurSongId(songData?.encodeId));
                 dispatch(actions.play(true));
@@ -26,20 +26,23 @@ function ListItem({ songData }) {
             }}
         >
             <div className="flex flex-1 items-center gap-2">
-                <span>
-                    <BsMusicNoteBeamed />
-                </span>
-                <img src={songData?.thumbnail} alt="thumbnail" className="w-10 h-10 object-contain " />
-                <div className="flex flex-col text-xs text-[#696969] ">
-                    <span className="text-[#32323d] text-sm font-semibold ">
-                        {songData?.title.length > 21 ? `${songData?.title.slice(0, 21)}...` : songData?.title}
+                {!isHideNode && (
+                    <span>
+                        <BsMusicNoteBeamed />
                     </span>
-                    <span>{songData?.artistsNames}</span>
+                )}
+
+                <img src={songData?.thumbnail} alt="thumbnail" className="w-10 h-10 object-contain rounded-md " />
+                <div className="flex flex-col text-xs">
+                    <span className="text-sm font-semibold ">
+                        {songData?.title.length > 40 ? `${songData?.title.slice(0, 40)}...` : songData?.title}
+                    </span>
+                    <span className="opacity-70">{songData?.artistsNames}</span>
                 </div>
             </div>
 
-            <div className="flex flex-1 justify-center pl-3">{songData?.album?.title}</div>
-            <div className="flex flex-1 justify-end">{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
+            <div className="flex flex-1 justify-center pl-3 text-xs text-gray-500">{songData?.album?.title}</div>
+            <div className="flex flex-1 text-xs justify-end items-center opacity-70">{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
         </div>
     );
 }

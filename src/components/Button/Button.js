@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function Button({ className, to, href, disabled, icon, children, onClick, ...passProps }) {
+function Button({ className, to, href, disabled, icon, children, onClick, leftIcon, rightIcon, ...passProps }) {
     let Comp = 'button';
     const props = {
         onClick,
@@ -29,7 +29,9 @@ function Button({ className, to, href, disabled, icon, children, onClick, ...pas
 
     return (
         <Comp {...props}>
+            {leftIcon && <span>{leftIcon}</span>}
             <span>{children}</span>
+            {rightIcon && <span>{rightIcon}</span>}
         </Comp>
     );
 }

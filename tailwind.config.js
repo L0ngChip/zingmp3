@@ -17,8 +17,9 @@ module.exports = {
                 'main-300': '#CED9D9',
                 'main-400': '#C0D8D8',
                 'main-500': '#0E8080',
+                'main-text': '#32323d',
+                'text-secondary': '#696969',
             },
-
             flex: {
                 4: '4 4 0%',
             },

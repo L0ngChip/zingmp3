@@ -60,11 +60,12 @@ function SidebarRight() {
                             <div className="flex flex-col">
                                 {recentSongs.map((item) => (
                                     <SongItem
+                                        key={item?.sid}
                                         thumbnail={item?.thumbnail}
                                         title={item?.title}
                                         artistsNames={item?.artistsNames}
                                         sid={item?.encodeId}
-                                        sm
+                                        size="w-[40px] h-[40px]"
                                     />
                                 ))}
                             </div>
@@ -81,7 +82,7 @@ function SidebarRight() {
                             sid={curSongData?.encodeId}
                             // eslint-disable-next-line
                             style="bg-main-500 text-white"
-                            sm
+                            size="w-[40px] h-[40px]"
                         />
                         <div className="flex flex-col pt-[15px] px-2 pb-[5px] text-black text-sm">
                             <span className="font-bold">Tiếp theo</span>
@@ -104,7 +105,7 @@ function SidebarRight() {
                                             title={item?.title}
                                             artistsNames={item?.artistsNames}
                                             sid={item?.encodeId}
-                                            sm
+                                            size="w-[40px] h-[40px]"
                                         />
                                     </div>
                                 ))}
@@ -113,6 +114,7 @@ function SidebarRight() {
                     </Scrollbars>
                 </div>
             )}
+            <div className="h-[90px]"></div>
         </div>
     );
 }

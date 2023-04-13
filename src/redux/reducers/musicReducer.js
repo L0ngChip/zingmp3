@@ -8,6 +8,8 @@ const initState = {
     atAlbum: false,
     songs: null,
     recentSongs: [],
+    searchData: {},
+    keyword: '',
 };
 // Hàm xử lý song
 const musicReducer = (state = initState, action) => {
@@ -57,7 +59,12 @@ const musicReducer = (state = initState, action) => {
                 ...state,
                 recentSongs: songs,
             };
-        //? [action.data, ...state.recentSongs] : state.recentSongs
+        case actionTypes.SEARCH:
+            return {
+                ...state,
+                searchData: action.data || {},
+                keyword: action.keyword || '',
+            };
         default:
             return state;
     }

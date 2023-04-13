@@ -48,9 +48,15 @@ function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescript
                 <img ref={imageRef} src={thumbnailM} alt="avatar" className="w-full h-auto rounded-lg" />
             </div>
             <div className="mt-3 text-sm">
-                <h4 className="mb-1 font-bold hover:text-main-500 cursor-pointer">{title?.length >= 37 ? `${title?.slice(0, 35)}...` : title}</h4>
+                <h4 className="mb-1 font-bold hover:text-main-500 cursor-pointer">{title?.length >= 33 ? `${title?.slice(0, 33)}...` : title}</h4>
                 <h3 className="font-normal text-gray-500">
-                    {data?.sectionId === 'h100' ? <span>{artistsNames}</span> : sortDescription?.length >= 40 ? `${sortDescription?.slice(0, 40)}...` : sortDescription}
+                    {data?.sectionId === 'h100' ? (
+                        <span>{artistsNames}</span>
+                    ) : sortDescription?.length >= 40 ? (
+                        `${sortDescription?.slice(0, 40)}...`
+                    ) : (
+                        sortDescription
+                    )}
                 </h3>
             </div>
         </div>

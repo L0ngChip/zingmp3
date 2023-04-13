@@ -42,7 +42,7 @@ function Album() {
 
     return (
         <Scrollbars style={{ width: '100%', height: '100%' }}>
-            <div className="flex w-full gap-8 px-[59px] mb-[30px] border border-red-400">
+            <div className="flex w-full gap-8 px-[59px] pt-[40px]">
                 <div className="flex flex-col w-1/4 pb-[30px]">
                     <div className="w-full relative">
                         <img
@@ -62,8 +62,8 @@ function Album() {
                             </span>
                         </div>
                     </div>
-                    <div className="flex flex-col mt-3 items-center text-[12px] leading-[21px] text-[#696969] ">
-                        <span className="text-xl font-bold text-[#32323d]">{playlistData?.title}</span>
+                    <div className="flex flex-col mt-3 items-center justify-center text-[12px] leading-[21px] text-[#696969] ">
+                        <span className="text-xl items-center justify-center font-bold text-[#32323d]">{playlistData?.title}</span>
                         <span>
                             <span>Cập nhật: </span>
                             <span>{moment.unix(playlistData?.contentLastUpdate).format('DD/MM/YYYY')}</span>
@@ -72,7 +72,7 @@ function Album() {
                         <span>{Math.round(playlistData.like / 1000)}K người yêu thích</span>
                     </div>
                 </div>
-                <div className="flex-auto text-sm text-[#32323D] overflow-y-auto">
+                <div className="flex-auto w-3/4 text-sm text-[#32323D] overflow-y-auto">
                     <div className="mb-[10px]">
                         <span className="text-gray-500">Lời tự </span>
                         <span>{playlistData?.description}</span>

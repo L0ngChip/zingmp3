@@ -108,9 +108,7 @@ function Slider() {
                         src={item.banner}
                         alt=""
                         onClick={() => handleClickBanner(item)}
-                        className={`slider-item flex-1 object-contain rounded-lg w-[30%] ${
-                            index <= 2 ? 'block' : 'hidden'
-                        }`}
+                        className={`slider-item flex-1 object-contain rounded-lg w-[30%] cursor-pointer  ${index <= 2 ? 'block' : 'hidden'}`}
                     />
                 ))}
             </div>
