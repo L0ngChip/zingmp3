@@ -3,7 +3,7 @@ const path = {
     HOME: '',
     LOGIN: 'login',
     MYMUSIC: '/mymusic',
-    zingchart: '/zing-chart',
+    zingchart: 'zing-chart',
     radio: '/radio',
     follow: '/follow',
     ALBUM_TITLE_PID: '/album/:title/:pid',
@@ -13,7 +13,8 @@ const path = {
     ALL: 'tat-ca',
     SONGS: 'bai-hat',
     PLAYLIST_SEARCH: 'playlist',
-    SINGER: ':singer',
+    SINGER: '/:singer',
+    ARTIST_SINGER: 'nghe-si/:singer',
 };
 
 export default path;

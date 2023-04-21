@@ -10,6 +10,7 @@ const initState = {
     newRelease: {},
     weekChart: [],
     favoriteArtist: {},
+    scrollTop: 0,
 };
 const appReducer = (state = initState, action) => {
     switch (action.type) {
@@ -29,6 +30,11 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 isLoading: action.flag,
+            };
+        case actionTypes.ZERO_SCROLL:
+            return {
+                ...state,
+                scrollTop: action.flag,
             };
 
         default:

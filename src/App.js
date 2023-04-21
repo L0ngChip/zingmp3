@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 
-import { Public, Home, Login, Personal, Album, Search, SearchSong, SearchAll, Singer, SearchPlaylist } from '~/public/index';
-import { WeekChart } from './components/WeekChart';
+import { Public, Home, Login, Personal, Album, Search, SearchSong, SearchAll, Singer, SearchPlaylist, ZingChart, WeekChart } from '~/public/index';
 import 'react-toastify/dist/ReactToastify.css';
 import path from './utils/path';
 import * as actions from '~/redux/actions';
@@ -25,8 +24,10 @@ function App() {
                         <Route path={path.MYMUSIC} element={<Personal />} />
                         <Route path={path.ALBUM_TITLE_PID} element={<Album />} />
                         <Route path={path.PLAYLIST_TITLE_PID} element={<Album />} />
-                        <Route path={path.SINGER} element={<Singer />} />
+                        <Route path={path.zingchart} element={<ZingChart />} />
                         <Route path={path.WEEKCHART_TITLE_PID} element={<WeekChart />} />
+                        <Route path={path.SINGER} element={<Singer />} />
+                        <Route path={path.ARTIST_SINGER} element={<Singer />} />
                         <Route path={path.SEARCH} element={<Search />}>
                             <Route path={path.ALL} element={<SearchAll />} />
                             <Route path={path.SONGS} element={<SearchSong />} />

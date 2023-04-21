@@ -9,6 +9,7 @@ function Home() {
     const { newReleaseChart, top100, womenMusic, weekChart, favoriteArtist } = useSelector((state) => state.app);
     return (
         <div className="overflow-y-auto w-full">
+            <div className="h-[70px]"></div>
             <Slider className="" />
             <NewRelease />
             <Section data={top100} />
@@ -22,7 +23,7 @@ function Home() {
             </div>
             <Section data={favoriteArtist} />
             <Section data={womenMusic} />
-            <div className="h-[300px] w-full"></div>
+            <div className="h-[90px] w-full"></div>
         </div>
     );
 }

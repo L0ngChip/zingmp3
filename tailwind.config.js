@@ -20,8 +20,8 @@ module.exports = {
                 'main-text': '#32323d',
                 'text-secondary': '#696969',
             },
-            flex: {
-                4: '4 4 0%',
+            boxShadow: {
+                'header-box-shadow': '0 3px 5px rgba(0,0,0,0.08)',
             },
 
             keyframes: {
@@ -116,6 +116,12 @@ module.exports = {
                 'scale-up-center': 'scale-up-center 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
                 'scale-up-image': 'scale-up-image 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
                 'scale-down-image': 'scale-down-image 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
+            },
+            flex: {
+                3: '3 3 0%',
+                4: '4 4 0%',
+                6: '6 6 0%',
+                7: '7 7 0%',
             },
         },
     },

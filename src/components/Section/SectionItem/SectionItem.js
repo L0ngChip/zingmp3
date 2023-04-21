@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, useRef } from 'react';
 import { BsHeart, BsPlayFill, BsThreeDots } from 'react-icons/bs';
 
-function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescription }) {
+function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescription, releaseDateText }) {
     const navigate = useNavigate();
     const [isHover, setIsHover] = useState(false);
     const imageRef = useRef();
@@ -49,6 +49,7 @@ function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescript
             </div>
             <div className="mt-3 text-sm">
                 <h4 className="mb-1 font-bold hover:text-main-500 cursor-pointer">{title?.length >= 33 ? `${title?.slice(0, 33)}...` : title}</h4>
+                {releaseDateText && <h3 className="font-normal text-gray-500">{releaseDateText}</h3>}
                 <h3 className="font-normal text-gray-500">
                     {data?.sectionId === 'h100' ? (
                         <span>{artistsNames}</span>

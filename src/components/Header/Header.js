@@ -3,9 +3,9 @@ import { Search } from '~/components/Search';
 
 function Header() {
     return (
-        <div className="flex justify-between w-full ">
-            <div className="flex w-full items-center gap-5">
-                <div className="flex items-center text-gray-400 gap-5 ">
+        <div className="flex justify-between w-full items-center">
+            <div className="flex w-full items-center gap-6">
+                <div className="flex items-center text-gray-400 gap-6 ">
                     <span>
                         <HiOutlineArrowLeft size={24} />
                     </span>
@@ -17,8 +17,7 @@ function Header() {
                     <Search />
                 </div>
             </div>
-
-            <div>Level right</div>
+            <div>Login</div>
         </div>
     );
 }

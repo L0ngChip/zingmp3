@@ -5,12 +5,11 @@ import moment from 'moment';
 
 import * as actions from '~/redux/actions';
 
-function ListItem({ songData, isHideNode }) {
+function ListItem({ songData, isHideNode, isHideTitle, order, style, smWidth, showArtist }) {
     const dispatch = useDispatch();
-
     return (
         <div
-            className="flex w-full justify-between items-cen1ter p-[10px] border-b border-[#0000000d] rounded-md hover:bg-[#ffffff4d] cursor-pointer"
+            className="flex w-full justify-between items-center p-[10px] border-b border-[#0000000d] rounded-md hover:bg-[#ffffff4d] cursor-pointer"
             onClick={() => {
                 dispatch(actions.setCurSongId(songData?.encodeId));
                 dispatch(actions.play(true));
@@ -25,24 +24,42 @@ function ListItem({ songData, isHideNode }) {
                 );
             }}
         >
-            <div className="flex flex-1 items-center gap-2">
-                {!isHideNode && (
-                    <span>
-                        <BsMusicNoteBeamed />
-                    </span>
-                )}
+            <div className="flex items-center w-full">
+                <div className="flex flex-1 gap-2">
+                    <div className="flex items-center gap-2">
+                        {order ? (
+                            <span
+                                className={`flex ${style || ''} justify-center ${
+                                    order === 1 ? 'text-shadow-no1' : order === 2 ? 'text-shadow-no2' : 'text-shadow-no3'
+                                } text-white drop-shadow-md text-[32px] mr-3`}
+                            >
+                                {order}
+                            </span>
+                        ) : (
+                            !isHideNode && (
+                                <span className="opacity-70">
+                                    <BsMusicNoteBeamed />
+                                </span>
+                            )
+                        )}
 
-                <img src={songData?.thumbnail} alt="thumbnail" className="w-10 h-10 object-contain rounded-md " />
-                <div className="flex flex-col text-xs">
-                    <span className="text-sm font-semibold ">
-                        {songData?.title.length > 40 ? `${songData?.title.slice(0, 40)}...` : songData?.title}
-                    </span>
-                    <span className="opacity-70">{songData?.artistsNames}</span>
+                        <img src={songData?.thumbnail} alt="thumbnail" className="w-10 h-10 object-contain rounded-md " />
+                    </div>
+                    <div className="flex flex-col text-xs justify-center ">
+                        <span className="text-sm font-semibold">
+                            {songData?.title.length > 31 ? `${songData?.title.slice(0, 31)}...` : songData?.title}
+                        </span>
+                        <span className="mt-[2px] opacity-70">
+                            {showArtist ? songData?.artistsNames.split(',', 2).join(',') : songData?.artistsNames}
+                        </span>
+                    </div>
+                </div>
+                <div className={`flex ${smWidth ? 'w-1/5' : 'flex-1'} justify-between items-center `}>
+                    {!isHideTitle && <div className="flex text-xs text-gray-500 justify-start">{songData?.album?.title}</div>}
+                    <div className="w-[4px] h-[4px]"></div>
+                    <div className="flex text-xs opacity-70 justify-end">{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
                 </div>
             </div>
-
-            <div className="flex flex-1 justify-center pl-3 text-xs text-gray-500">{songData?.album?.title}</div>
-            <div className="flex flex-1 text-xs justify-end items-center opacity-70">{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
         </div>
     );
 }

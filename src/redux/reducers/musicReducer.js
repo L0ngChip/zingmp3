@@ -10,6 +10,7 @@ const initState = {
     recentSongs: [],
     searchData: {},
     keyword: '',
+    scrollTop: 0,
 };
 // Hàm xử lý song
 const musicReducer = (state = initState, action) => {

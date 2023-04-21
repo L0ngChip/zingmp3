@@ -80,3 +80,16 @@ export const apisGetArtist = (alias) =>
             reject(error);
         }
     });
+
+export const apisGetChartHome = () =>
+    new Promise(async (resolve, reject) => {
+        try {
+            const response = await axios({
+                url: '/charthome',
+                method: 'get',
+            });
+            resolve(response);
+        } catch (error) {
+            reject(error);
+        }
+    });

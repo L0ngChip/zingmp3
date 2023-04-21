@@ -3,14 +3,14 @@ import { MdClose } from 'react-icons/md';
 import { useState, useEffect } from 'react';
 import * as actions from '~/redux/actions';
 import { useDispatch } from 'react-redux';
-import { useNavigate, createSearchParams } from 'react-router-dom';
+import { useNavigate, createSearchParams, useParams } from 'react-router-dom';
 import path from '~/utils/path';
 
 function Search() {
     const [keyword, setKeyword] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const { singer } = useParams();
     //Hàm lấy api khi nhập keywords tìm kiếm và đưa ra path  keywords
     const handleSearch = async (e) => {
         if (e.keyCode === 13) {
@@ -26,12 +26,12 @@ function Search() {
 
     return (
         <div className="w-full flex items-center relative">
-            <span className="flex h-10 px-2 py-2 items-center rounded-l-[20px] text-gray-500 bg-[#ffffff4d] cursor-pointer">
+            <span className={`flex h-10 px-2 py-2 items-center rounded-l-[20px] text-gray-500 ${'bg-[#ffffff4d]'} cursor-pointer`}>
                 <HiOutlineSearch size={20} />
             </span>
             <input
                 type="text"
-                className="outline-none w-full h-10 py-2 rounded-r-[20px] text-sm text-gray-500 bg-[#ffffff4d]"
+                className={`outline-none w-full h-10 py-2 rounded-r-[20px] text-sm text-gray-500 ${'bg-[#ffffff4d]'}`}
                 placeholder="Tìm kiếm bài hát, nghệ sĩ, lời bài hát..."
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}

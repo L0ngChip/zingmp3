@@ -7,10 +7,14 @@ function ListSong({ isHideAlbum }) {
     return (
         <div className="w-full flex flex-col text-xs mt-[10px]">
             {!isHideAlbum && (
-                <div className="flex justify-between text-gray-500 items-center p-[10px] border-b border-[#0000000d]">
-                    <span>BÀI HÁT</span>
-                    <span>ALBUM</span>
-                    <span>TIME</span>
+                <div className="flex w-full text-gray-500 items-center p-[10px] border-b border-[#0000000d]">
+                    <div className="w-1/2">
+                        <span>BÀI HÁT</span>
+                    </div>
+                    <div className="w-1/2 flex justify-between">
+                        <span>ALBUM</span>
+                        <span>TIME</span>
+                    </div>
                 </div>
             )}
             <div>

@@ -21,6 +21,7 @@ function Search() {
     const { keyword } = useSelector((state) => state.music);
     return (
         <div>
+            <div className="h-[70px]"></div>
             <div className="flex h-[50px] pl-[59px] mb-7 text-sm border-b border-gray-400 items-center">
                 <span className="pr-5 border-r border-gray-400 font-bold text-[24px]">KẾT QUẢ TÌM KIẾM</span>
                 <div className="flex font-medium text-main-text items-center">
