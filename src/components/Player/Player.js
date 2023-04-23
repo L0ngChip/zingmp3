@@ -148,7 +148,7 @@ function Player({ setShowSidebar }) {
     };
     return (
         <div className="flex h-full px-5 bg-main-400 ">
-            <div className="flex items-center w-[30%] gap-[10px]">
+            <div className="w-[30%] flex items-center gap-[10px]">
                 <img src={infoSong?.thumbnail} alt="" className="w-16 h-16 object-cover" />
                 <div>
                     <div className="text-sm font-medium mb-[1px] text-[#32323d]">
@@ -165,7 +165,7 @@ function Player({ setShowSidebar }) {
                     </Button>
                 </div>
             </div>
-            <div className="flex flex-col w-[40%] items-center justify-center gap-4">
+            <div className="w-[40%] flex flex-col items-center justify-center gap-4">
                 {/* Xử lý CSS padding và margin */}
                 <div className="flex gap-4">
                     <Button

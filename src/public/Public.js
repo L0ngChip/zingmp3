@@ -11,11 +11,11 @@ import { Loading } from '~/components/Loading';
 import * as actions from '~/redux/actions';
 
 function Public() {
+    const { currentWidth } = useSelector((state) => state.app);
     const [showSidebar, setShowSidebar] = useState(false);
     const { isLoading, scrollTop } = useSelector((state) => state.app);
     const { singer } = useParams();
     const dispatch = useDispatch();
-
     const handleScroll = (e) => {
         if (e.target.scrollTop === 0) {
             dispatch(actions.zeroScrollTop(true));
@@ -23,14 +23,13 @@ function Public() {
             dispatch(actions.zeroScrollTop(false));
         }
     };
-    // console.log(scrollValue);
     return (
         <div className="w-full relative h-screen flex flex-col bg-main-300">
             <div className="w-full h-full flex flex-auto">
-                <div className="flex-none w-[240px] h-full border border-blue-400 bg-main-200">
+                <div className={`flex-none ${currentWidth > 1132 ? 'w-[240px]' : 'w-[70px]'} h-full border border-blue-400 bg-main-200`}>
                     <SidebarLeft />
                 </div>
-                <div className="flex-auto relative flex flex-col border border-red-500">
+                <div className="flex-auto relative flex flex-col">
                     {isLoading && (
                         <div className="absolute top-0 right-0 bottom-0 left-0 z-20 bg-main-200 flex items-center justify-center">
                             <Loading />
@@ -39,7 +38,9 @@ function Public() {
 
                     <div
                         className={`h-[70px] px-[59px] ${
-                            scrollTop ? 'bg-transparent fixed top-0 left-[238px] right-[330px]' : 'bg-main-300 shadow-header-box-shadow'
+                            scrollTop
+                                ? `bg-transparent fixed top-0 ${currentWidth > 1132 ? 'left-[240px]' : 'left-[70px]'} right-[330px]`
+                                : 'bg-main-300 shadow-header-box-shadow'
                         } z-50 flex items-center`}
                     >
                         <Header />

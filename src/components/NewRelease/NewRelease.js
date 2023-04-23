@@ -4,7 +4,7 @@ import { Button } from '~/components/Button';
 import { SongItem } from './SongItem';
 
 function NewRelease() {
-    const { newRelease } = useSelector((state) => state.app);
+    const { newRelease, currentWidth } = useSelector((state) => state.app);
     const [isActive, setIsActive] = useState(0);
     const [songs, setSongs] = useState([]);
 
@@ -34,7 +34,7 @@ function NewRelease() {
 
             <div className="flex flex-wrap gap-4">
                 {songs
-                    ?.filter((item, index) => index <= 11)
+                    ?.filter((item, index) => (currentWidth > 1224 ? index <= 11 : index <= 7))
                     .map((item) => (
                         <SongItem
                             key={item?.encodeId}

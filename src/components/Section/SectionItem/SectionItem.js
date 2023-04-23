@@ -19,7 +19,7 @@ function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescript
     };
     return (
         <div
-            className="flex flex-col w-1/5 flex-auto cursor-pointer"
+            className="flex flex-col flex-1 gap-3 justify-start cursor-pointer"
             onClick={() => {
                 navigate(link.split('.')[0], { state: { playAlbum: false } });
             }}

@@ -1,7 +1,9 @@
 import { memo } from 'react';
 import { SectionItem } from './SectionItem';
+import { useSelector } from 'react-redux';
 
 function Section({ data }) {
+    const { currentWidth } = useSelector((state) => state.app);
     return (
         <div className="flex flex-col w-full px-[59px] mt-12">
             <div className="flex items-center justify-between mb-5">
@@ -11,7 +13,7 @@ function Section({ data }) {
                 {data &&
                     data?.items?.length > 0 &&
                     data?.items
-                        ?.filter((item, index) => index <= 4)
+                        ?.filter((item, index) => (currentWidth < 800 ? index <= 2 : currentWidth < 1350 ? index <= 3 : index <= 4))
                         ?.map((item) => (
                             <SectionItem
                                 key={item?.encodeId}

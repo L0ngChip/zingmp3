@@ -1,11 +1,12 @@
 import { memo } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { BsMusicNoteBeamed } from 'react-icons/bs';
 import moment from 'moment';
 
 import * as actions from '~/redux/actions';
 
 function ListItem({ songData, isHideNode, isHideTitle, order, style, smWidth, showArtist }) {
+    const { currentWidth } = useSelector((state) => state.app);
     const dispatch = useDispatch();
     return (
         <div
@@ -45,19 +46,33 @@ function ListItem({ songData, isHideNode, isHideTitle, order, style, smWidth, sh
 
                         <img src={songData?.thumbnail} alt="thumbnail" className="w-10 h-10 object-contain rounded-md " />
                     </div>
-                    <div className="flex flex-col text-xs justify-center ">
+                    <div className={`flex flex-col text-xs justify-center`}>
                         <span className="text-sm font-semibold">
-                            {songData?.title.length > 31 ? `${songData?.title.slice(0, 31)}...` : songData?.title}
+                            {currentWidth < 1060 && showArtist
+                                ? songData?.title
+                                : 1060 < currentWidth < 1270 && showArtist
+                                ? `${songData?.title.slice(0, 12)}...`
+                                : songData?.title.length > 31
+                                ? `${songData?.title.slice(0, 31)}...`
+                                : songData?.title}
                         </span>
                         <span className="mt-[2px] opacity-70">
-                            {showArtist ? songData?.artistsNames.split(',', 2).join(',') : songData?.artistsNames}
+                            {currentWidth < 1060 && showArtist
+                                ? songData?.artistsNames.split(',', 2).join(',')
+                                : 1060 <= currentWidth <= 1280 && showArtist
+                                ? songData?.artistsNames.split(',', 2).join(',') && `${songData?.artistsNames.slice(0, 9)}...`
+                                : songData?.artistsNames}
                         </span>
                     </div>
                 </div>
-                <div className={`flex ${smWidth ? 'w-1/5' : 'flex-1'} justify-between items-center `}>
-                    {!isHideTitle && <div className="flex text-xs text-gray-500 justify-start">{songData?.album?.title}</div>}
+                <div className={`flex ${smWidth ? 'w-1/5' : 'flex-1'} justify-between items-center ${currentWidth < 750 && 'hidden'}`}>
+                    {!isHideTitle && (
+                        <div className={`flex text-xs text-gray-500 justify-start ${currentWidth < 770 ? 'hidden' : ''}`}>
+                            {songData?.album?.title}
+                        </div>
+                    )}
                     <div className="w-[4px] h-[4px]"></div>
-                    <div className="flex text-xs opacity-70 justify-end">{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
+                    <div className={`flex text-xs opacity-70 justify-end`}>{moment.utc(songData?.duration * 1000).format('mm:ss')}</div>
                 </div>
             </div>
         </div>

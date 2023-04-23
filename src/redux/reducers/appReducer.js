@@ -11,6 +11,7 @@ const initState = {
     weekChart: [],
     favoriteArtist: {},
     scrollTop: 0,
+    currentWidth: {},
 };
 const appReducer = (state = initState, action) => {
     switch (action.type) {
@@ -35,6 +36,11 @@ const appReducer = (state = initState, action) => {
             return {
                 ...state,
                 scrollTop: action.flag,
+            };
+        case actionTypes.CURRENT_WIDTH:
+            return {
+                ...state,
+                currentWidth: action.w,
             };
 
         default:

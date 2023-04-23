@@ -1,5 +1,5 @@
 import { BsFillPlayFill } from 'react-icons/bs';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Scrollbars from 'react-custom-scrollbars-2';
 
 import { apisGetChartHome } from '~/apis';
@@ -12,6 +12,7 @@ const activeStyle = 'hover:text-main-500 font-bold items-center cursor-pointer b
 function WeekChart() {
     const [data, setData] = useState(null);
     const pid = useParams();
+    const ref = useRef();
     useEffect(() => {
         const fetchChartData = async () => {
             const res = await apisGetChartHome();
@@ -21,12 +22,15 @@ function WeekChart() {
         };
         fetchChartData();
     }, []);
+    useEffect(() => {
+        ref.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }, [data]);
 
     console.log(pid);
     return (
         <div className="">
             <div className="w-full flex flex-col">
-                <div className="relative h-[500px]">
+                <div className="relative h-[500px]" ref={ref}>
                     <img className="w-full h-[500px] grayscale object-cover" src={images.bgChart2} alt="background" />
                     <div className="absolute top-0 right-0 bottom-0 left-0 bg-[rgba(206,217,217,0.6)]"></div>
                     <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-t from-[#CED9D9] to-transparent"></div>
@@ -58,8 +62,7 @@ function WeekChart() {
                         </div>
                         <div className="absolute w-full top-1/2 right-0 bottom-0 left-0 px-[60px] pt-4">
                             <Scrollbars autoHide style={{ width: '100%', height: '150%' }}>
-                                <RankList data={data?.find((item) => item?.link?.includes(pid?.pid))?.items} number={40} />
-                                <div className="h-[30px]"></div>
+                                <RankList data={data?.find((item) => item?.link?.includes(pid?.pid))?.items} number={40} hideButton />
                             </Scrollbars>
                         </div>
                     </div>

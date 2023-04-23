@@ -1,7 +1,7 @@
 import { ToastContainer } from 'react-toastify';
 import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Public, Home, Login, Personal, Album, Search, SearchSong, SearchAll, Singer, SearchPlaylist, ZingChart, WeekChart } from '~/public/index';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,9 +10,27 @@ import * as actions from '~/redux/actions';
 
 function App() {
     const dispatch = useDispatch();
+    //Lấy width lần đầu
+    const [currentWidth, setCurrentWidth] = useState(window.innerWidth);
+
+    //Hàm setWidth khi resize
+    const setWidth = (e) => {
+        setCurrentWidth(e.target.innerWidth);
+    };
     useEffect(() => {
         dispatch(actions.getHome());
     });
+
+    useEffect(() => {
+        window.addEventListener('resize', setWidth);
+        return () => {
+            window.removeEventListener('resize', setWidth);
+        };
+    }, []);
+    //Truyền width cho các page
+    useEffect(() => {
+        dispatch(actions.setCurrentWidth(currentWidth));
+    }, [currentWidth]);
 
     return (
         <>

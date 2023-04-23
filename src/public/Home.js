@@ -13,7 +13,7 @@ function Home() {
             <Slider className="" />
             <NewRelease />
             <Section data={top100} />
-            <Section data={newReleaseChart} />
+            {/* <Section data={newReleaseChart} /> */}
             <div className="flex items-center w-full px-[59px] mt-12">
                 {weekChart.map((item) => (
                     <Link to={item?.link.split('.')[0]} key={item?.link} className="flex-1 px-4">

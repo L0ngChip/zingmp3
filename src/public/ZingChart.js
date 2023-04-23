@@ -8,8 +8,10 @@ import _ from 'lodash';
 import images from '~/assets';
 import { SongItem } from '~/components/NewRelease/SongItem';
 import { RankList } from '~/components/RankList';
+import { useSelector } from 'react-redux';
 
 function WeekChart() {
+    const { currentWidth } = useSelector((state) => state.app);
     const [chartData, setChartData] = useState(null);
     const [data, setData] = useState(null);
     const [selected, setSelected] = useState(null);
@@ -154,7 +156,7 @@ function WeekChart() {
                             <h3 className="text-4xl font-bold text-main-500">Bảng Xếp Hạng Tuần</h3>
                         </div>
                     </div>
-                    <div className="absolute px-[60px] top-[20%] right-0 bottom-0 left-0 flex gap-5">
+                    <div className={`absolute px-[60px] top-[20%] right-0 bottom-0 left-0 flex ${currentWidth < 1060 && 'flex-col'} gap-5`}>
                         {chartData?.weekChart &&
                             Object.entries(chartData?.weekChart)?.map((item, index) => (
                                 <div key={index} className="flex-1 bg-[rgba(255,255,255,0.6)] mb-[30px] px-[10px] py-5 rounded-2xl flex-col">

@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { NavLink, Outlet } from 'react-router-dom';
+import { Loading } from '~/components/Loading';
 
 const notActiveStyle = 'px-4 hover:text-main-500 font-semibold cursor-pointer ';
 const activeStyle = 'px-4 hover:text-main-500 font-semibold items-center cursor-pointer border-b-2 border-main-500 text-main-500 h-[52px] flex';
@@ -20,7 +21,7 @@ const searchMenu = [
 function Search() {
     const { keyword } = useSelector((state) => state.music);
     return (
-        <div>
+        <>
             <div className="h-[70px]"></div>
             <div className="flex h-[50px] pl-[59px] mb-7 text-sm border-b border-gray-400 items-center">
                 <span className="pr-5 border-r border-gray-400 font-bold text-[24px]">KẾT QUẢ TÌM KIẾM</span>
@@ -39,7 +40,7 @@ function Search() {
             <div className="w-full">
                 <Outlet />
             </div>
-        </div>
+        </>
     );
 }
 

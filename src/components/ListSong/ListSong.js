@@ -7,7 +7,7 @@ function ListSong({ isHideAlbum }) {
     return (
         <div className="w-full flex flex-col text-xs mt-[10px]">
             {!isHideAlbum && (
-                <div className="flex w-full text-gray-500 items-center p-[10px] border-b border-[#0000000d]">
+                <div className="flex w-full text-gray-500 font-semibold items-center p-[10px] border-b border-[#0000000d]">
                     <div className="w-1/2">
                         <span>BÀI HÁT</span>
                     </div>
