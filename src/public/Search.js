@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import { NavLink, Outlet } from 'react-router-dom';
-import { Loading } from '~/components/Loading';
 
 const notActiveStyle = 'px-4 hover:text-main-500 font-semibold cursor-pointer ';
 const activeStyle = 'px-4 hover:text-main-500 font-semibold items-center cursor-pointer border-b-2 border-main-500 text-main-500 h-[52px] flex';

@@ -9,12 +9,14 @@ import images from '~/assets';
 import { SongItem } from '~/components/NewRelease/SongItem';
 import { RankList } from '~/components/RankList';
 import { useSelector } from 'react-redux';
+import { Loading } from '~/components/Loading';
 
 function WeekChart() {
     const { currentWidth } = useSelector((state) => state.app);
     const [chartData, setChartData] = useState(null);
     const [data, setData] = useState(null);
     const [selected, setSelected] = useState(null);
+    const ref = useRef();
     const [tooltipState, setTooltipState] = useState({
         opacity: 0,
         top: 0,
@@ -105,10 +107,14 @@ function WeekChart() {
             setData({ labels, datasets });
         }
     }, [chartData]);
+    // Hàm cuộn lên trang đầu
+    useEffect(() => {
+        ref.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }, [chartData]);
     return (
-        <div className="">
+        <>
             <div className="w-full flex flex-col">
-                <div className="relative h-[500px]">
+                <div className="relative h-[500px]" ref={ref}>
                     <img className="w-full h-[500px] grayscale object-cover" src={images.bgChart} alt="background" />
                     <div className="absolute top-0 right-0 bottom-0 left-0 bg-[rgba(206,217,217,0.9)]"></div>
                     <div className="absolute top-0 right-0 bottom-0 left-0 bg-gradient-to-t from-[#CED9D9] to-transparent"></div>
@@ -176,7 +182,7 @@ function WeekChart() {
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 

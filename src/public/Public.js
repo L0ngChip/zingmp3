@@ -30,12 +30,6 @@ function Public() {
                     <SidebarLeft />
                 </div>
                 <div className="flex-auto relative flex flex-col">
-                    {isLoading && (
-                        <div className="absolute top-0 right-0 bottom-0 left-0 z-20 bg-main-200 flex items-center justify-center">
-                            <Loading />
-                        </div>
-                    )}
-
                     <div
                         className={`h-[70px] px-[59px] ${
                             scrollTop

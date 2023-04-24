@@ -53,7 +53,7 @@ function SidebarRight() {
                     <BsTrash size={14} />
                 </span>
             </div>
-            {isRecent ? (
+            {curSongId && isRecent ? (
                 <div className="w-full flex flex-col flex-auto px-2">
                     <Scrollbars autoHide style={{ width: '100%', height: '100%' }}>
                         {recentSongs && (

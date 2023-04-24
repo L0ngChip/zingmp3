@@ -147,96 +147,104 @@ function Player({ setShowSidebar }) {
         audio.volume = e.target.value / 100;
     };
     return (
-        <div className="flex h-full px-5 bg-main-400 ">
-            <div className="w-[30%] flex items-center gap-[10px]">
-                <img src={infoSong?.thumbnail} alt="" className="w-16 h-16 object-cover" />
-                <div>
-                    <div className="text-sm font-medium mb-[1px] text-[#32323d]">
-                        <span>{infoSong?.title}</span>
+        <>
+            {curSongId && (
+                <div className="flex h-full px-5 bg-main-400 ">
+                    <div className="w-[30%] flex items-center gap-[10px]">
+                        <img src={infoSong?.thumbnail} alt="" className="w-16 h-16 object-cover" />
+                        <div>
+                            <div className="text-sm font-medium mb-[1px] text-[#32323d]">
+                                <span>{infoSong?.title}</span>
+                            </div>
+                            <h3 className="text-xs text-[#696969]">{infoSong?.artistsNames}</h3>
+                        </div>
+                        <div className="flex items-center">
+                            <Button className="p-[3px] flex w-8 h-8 justify-center items-center">
+                                <BsHeart size={16} />
+                            </Button>
+                            <Button className="p-[3px] flex w-8 h-8 justify-center items-center">
+                                <BsThreeDots size={16} />
+                            </Button>
+                        </div>
                     </div>
-                    <h3 className="text-xs text-[#696969]">{infoSong?.artistsNames}</h3>
-                </div>
-                <div className="flex items-center">
-                    <Button className="p-[3px] flex w-8 h-8 justify-center items-center">
-                        <BsHeart size={16} />
-                    </Button>
-                    <Button className="p-[3px] flex w-8 h-8 justify-center items-center">
-                        <BsThreeDots size={16} />
-                    </Button>
-                </div>
-            </div>
-            <div className="w-[40%] flex flex-col items-center justify-center gap-4">
-                {/* Xử lý CSS padding và margin */}
-                <div className="flex gap-4">
-                    <Button
-                        onClick={() => setIsShuffle((prev) => !prev)}
-                        className={`p-[3px] mx-[7px] cursor-pointer ${isShuffle && 'text-main-500'}`}
-                    >
-                        <RxShuffle size={24} />
-                    </Button>
-                    <Button
-                        onClick={handlePrevSong}
-                        className={`${!songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'}`}
-                    >
-                        <BsFillSkipStartFill size={24} />
-                    </Button>
-                    <Button
-                        className="p-1 mx-[7px] cursor-pointer border border-gray-700 rounded-full hover:text-main-500 hover:border-main-500"
-                        onClick={handleTogglePlay}
-                    >
-                        {!isLoadedSong ? <LoadingSong /> : isPlaying ? <BsPauseFill size={30} /> : <BsFillPlayFill size={30} />}
-                    </Button>
-                    <Button
-                        onClick={handleNextSong}
-                        className={`${!songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'}`}
-                    >
-                        <BsFillSkipEndFill size={24} />
-                    </Button>
-                    <Button
-                        onClick={() => setRepeatMode((prev) => (prev === 2 ? 0 : prev + 1))}
-                        className={`p-[3px] mx-[7px] cursor-pointer ${repeatMode && 'text-main-500'}`}
-                    >
-                        {repeatMode === 1 ? <RiRepeatOneFill size={24} /> : <CiRepeat size={24} />}
-                    </Button>
-                </div>
-                <div className="flex w-full justify-center items-center gap-4 text-xs font-medium">
-                    <span className="text-gray-400">{moment.utc(curSecond * 1000).format('mm:ss')}</span>
-                    <div
-                        className="relative w-3/4 h-[3px] hover:h-[8px] rounded-l-full rounded-r-full bg-[#0000001a] cursor-pointer"
-                        onClick={handleProgressBar}
-                        ref={trackRef}
-                    >
-                        <div ref={thumbRef} className="absolute top-0 bottom-0 left-0 rounded-l-full rounded-r-full bg-[#0e8080]"></div>
+                    <div className="w-[40%] flex flex-col items-center justify-center gap-4">
+                        {/* Xử lý CSS padding và margin */}
+                        <div className="flex gap-4">
+                            <Button
+                                onClick={() => setIsShuffle((prev) => !prev)}
+                                className={`p-[3px] mx-[7px] cursor-pointer ${isShuffle && 'text-main-500'}`}
+                            >
+                                <RxShuffle size={24} />
+                            </Button>
+                            <Button
+                                onClick={handlePrevSong}
+                                className={`${!songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'}`}
+                            >
+                                <BsFillSkipStartFill size={24} />
+                            </Button>
+                            <Button
+                                className="p-1 mx-[7px] cursor-pointer border border-gray-700 rounded-full hover:text-main-500 hover:border-main-500"
+                                onClick={handleTogglePlay}
+                            >
+                                {!isLoadedSong ? <LoadingSong /> : isPlaying ? <BsPauseFill size={30} /> : <BsFillPlayFill size={30} />}
+                            </Button>
+                            <Button
+                                onClick={handleNextSong}
+                                className={`${!songs ? 'p-[3px] mx-[7px] text-gray-500 cursor-default' : 'p-[3px] mx-[7px] cursor-pointer'}`}
+                            >
+                                <BsFillSkipEndFill size={24} />
+                            </Button>
+                            <Button
+                                onClick={() => setRepeatMode((prev) => (prev === 2 ? 0 : prev + 1))}
+                                className={`p-[3px] mx-[7px] cursor-pointer ${repeatMode && 'text-main-500'}`}
+                            >
+                                {repeatMode === 1 ? <RiRepeatOneFill size={24} /> : <CiRepeat size={24} />}
+                            </Button>
+                        </div>
+                        <div className="flex w-full justify-center items-center gap-4 text-xs font-medium">
+                            <span className="text-gray-400">{moment.utc(curSecond * 1000).format('mm:ss')}</span>
+                            <div
+                                className="relative w-3/4 h-[3px] hover:h-[8px] rounded-l-full rounded-r-full bg-[#0000001a] cursor-pointer"
+                                onClick={handleProgressBar}
+                                ref={trackRef}
+                            >
+                                <div ref={thumbRef} className="absolute top-0 bottom-0 left-0 rounded-l-full rounded-r-full bg-[#0e8080]"></div>
+                            </div>
+                            <span className="">{moment.utc(infoSong?.duration * 1000).format('mm:ss')}</span>
+                        </div>
                     </div>
-                    <span className="">{moment.utc(infoSong?.duration * 1000).format('mm:ss')}</span>
-                </div>
-            </div>
-            <div className="w-[30%] flex justify-end items-center">
-                <div className="flex gap-2 items-center" onMouseEnter={() => setIsHoverVolume(true)} onMouseLeave={() => setIsHoverVolume(false)}>
-                    <span>{+volume === 0 ? <SlVolumeOff /> : <SlVolume2 />}</span>
+                    <div className="w-[30%] flex justify-end items-center">
+                        <div
+                            className="flex gap-2 items-center"
+                            onMouseEnter={() => setIsHoverVolume(true)}
+                            onMouseLeave={() => setIsHoverVolume(false)}
+                        >
+                            <span>{+volume === 0 ? <SlVolumeOff /> : <SlVolume2 />}</span>
 
-                    <div className={`w-[130px] h-1 bg-white rounded-l-full rounded-r-full ${isHoverVolume ? 'hidden' : 'relative'} `}>
-                        <div ref={volumeRef} className="absolute left-0 bottom-0 top-0 bg-main-500"></div>
+                            <div className={`w-[130px] h-1 bg-white rounded-l-full rounded-r-full ${isHoverVolume ? 'hidden' : 'relative'} `}>
+                                <div ref={volumeRef} className="absolute left-0 bottom-0 top-0 bg-main-500"></div>
+                            </div>
+                            <input
+                                type="range"
+                                step={1}
+                                min={0}
+                                max={100}
+                                value={volume}
+                                onChange={handleVolume}
+                                className={` w-[130px] ${isHoverVolume ? 'inline' : 'hidden'}`}
+                            />
+                        </div>
+                        <span className="w-[1px] h-[33px] mx-5 bg-[#0000000d]"></span>
+                        <span
+                            onClick={() => setShowSidebar((prev) => !prev)}
+                            className="flex items-center bg-[#ffffff1a] rounded px-2 border-transparent h-[30px] cursor-pointer"
+                        >
+                            <BsMusicNoteList />
+                        </span>
                     </div>
-                    <input
-                        type="range"
-                        step={1}
-                        min={0}
-                        max={100}
-                        value={volume}
-                        onChange={handleVolume}
-                        className={` w-[130px] ${isHoverVolume ? 'inline' : 'hidden'}`}
-                    />
                 </div>
-                <span className="w-[1px] h-[33px] mx-5 bg-[#0000000d]"></span>
-                <span
-                    onClick={() => setShowSidebar((prev) => !prev)}
-                    className="flex items-center bg-[#ffffff1a] rounded px-2 border-transparent h-[30px] cursor-pointer"
-                >
-                    <BsMusicNoteList />
-                </span>
-            </div>
-        </div>
+            )}
+        </>
     );
 }
 
