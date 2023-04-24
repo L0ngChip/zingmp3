@@ -11,9 +11,9 @@ import { Loading } from '~/components/Loading';
 import * as actions from '~/redux/actions';
 
 function Public() {
-    const { currentWidth } = useSelector((state) => state.app);
+    const { curSongId } = useSelector((state) => state.music);
     const [showSidebar, setShowSidebar] = useState(false);
-    const { isLoading, scrollTop } = useSelector((state) => state.app);
+    const { isLoading, scrollTop, currentWidth } = useSelector((state) => state.app);
     const { singer } = useParams();
     const dispatch = useDispatch();
     const handleScroll = (e) => {
@@ -52,9 +52,11 @@ function Public() {
                     </div>
                 )}
             </div>
-            <div className="fixed bottom-0 left-0 right-0 z-50 flex-none h-[90px]">
-                <Player setShowSidebar={setShowSidebar} />
-            </div>
+            {curSongId && (
+                <div className="fixed bottom-0 left-0 right-0 z-50 flex-none h-[90px]">
+                    <Player setShowSidebar={setShowSidebar} />
+                </div>
+            )}
         </div>
     );
 }
