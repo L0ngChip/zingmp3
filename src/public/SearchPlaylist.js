@@ -14,7 +14,6 @@ function SearchPlaylist() {
         };
         fetch();
     }, [searchData]);
-    // console.log(playlist);
     return (
         <div className="w-full flex flex-col px-[59px] gap-8">
             <h3 className="text-lg font-bold">Playlist/Album</h3>

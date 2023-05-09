@@ -4,26 +4,27 @@ import { BsFillPlayFill } from 'react-icons/bs';
 import { Line } from 'react-chartjs-2';
 import Chart from 'chart.js/auto';
 import _ from 'lodash';
+import * as actions from '~/redux/actions';
 
 import images from '~/assets';
 import { SongItem } from '~/components/NewRelease/SongItem';
 import { RankList } from '~/components/RankList';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Loading } from '~/components/Loading';
 
 function WeekChart() {
-    const { currentWidth } = useSelector((state) => state.app);
+    const { currentWidth, isLoading } = useSelector((state) => state.app);
     const [chartData, setChartData] = useState(null);
     const [data, setData] = useState(null);
     const [selected, setSelected] = useState(null);
     const ref = useRef();
+    const chartRef = useRef();
+    const dispatch = useDispatch();
     const [tooltipState, setTooltipState] = useState({
         opacity: 0,
         top: 0,
         left: 0,
     });
-
-    const chartRef = useRef();
 
     const options = {
         responsive: true,
@@ -79,7 +80,9 @@ function WeekChart() {
     };
     useEffect(() => {
         const fetchChartData = async () => {
+            dispatch(actions.loading(true));
             const res = await apisGetChartHome();
+            dispatch(actions.loading(false));
             if (res.data.err === 0) {
                 setChartData(res.data.data);
             }
@@ -113,7 +116,12 @@ function WeekChart() {
     }, [chartData]);
     return (
         <>
-            <div className="w-full flex flex-col">
+            <div className="w-full flex flex-col relative">
+                {isLoading && (
+                    <div className="absolute top-1/3 right-0 bottom-0 left-0 z-20 bg-main-200 flex items-center justify-center">
+                        <Loading />
+                    </div>
+                )}
                 <div className="relative h-[500px]" ref={ref}>
                     <img className="w-full h-[500px] grayscale object-cover" src={images.bgChart} alt="background" />
                     <div className="absolute top-0 right-0 bottom-0 left-0 bg-[rgba(206,217,217,0.9)]"></div>

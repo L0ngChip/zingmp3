@@ -16,6 +16,7 @@ function Public() {
     const { isLoading, scrollTop, currentWidth } = useSelector((state) => state.app);
     const { singer } = useParams();
     const dispatch = useDispatch();
+
     const handleScroll = (e) => {
         if (e.target.scrollTop === 0) {
             dispatch(actions.zeroScrollTop(true));
@@ -26,10 +27,15 @@ function Public() {
     return (
         <div className="w-full relative h-screen flex flex-col bg-main-300">
             <div className="w-full h-full flex flex-auto">
-                <div className={`flex-none ${currentWidth > 1132 ? 'w-[240px]' : 'w-[70px]'} h-full border border-blue-400 bg-main-200`}>
+                <div className={`flex-none ${currentWidth > 1132 ? 'w-[240px]' : 'w-[70px]'} h-full bg-main-200`}>
                     <SidebarLeft />
                 </div>
                 <div className="flex-auto relative flex flex-col">
+                    {isLoading && (
+                        <div className="absolute top-0 right-0 bottom-0 left-0 z-20 bg-main-200 flex items-center justify-center">
+                            <Loading />
+                        </div>
+                    )}
                     <div
                         className={`h-[70px] px-[59px] ${
                             scrollTop
@@ -47,7 +53,7 @@ function Public() {
                     <div className="h-[90px]"></div>
                 </div>
                 {showSidebar && (
-                    <div className="flex-none h-screen w-[330px] border bg-main-300 animate-slide-left">
+                    <div className="flex-none h-screen w-[330px] border-l border-gray-400 bg-main-300 animate-slide-left">
                         <SidebarRight />
                     </div>
                 )}

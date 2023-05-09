@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useRef } from 'react';
+import { useState, useRef, use, useEffect } from 'react';
 import { BsHeart, BsPlayFill, BsThreeDots } from 'react-icons/bs';
 
 function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescription, releaseDateText }) {
@@ -19,7 +19,7 @@ function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescript
     };
     return (
         <div
-            className="flex flex-col flex-1 gap-3 justify-start cursor-pointer"
+            className="flex flex-col flex-1 gap-1 justify-start cursor-pointer"
             onClick={() => {
                 navigate(link.split('.')[0], { state: { playAlbum: false } });
             }}
@@ -48,15 +48,19 @@ function SectionItem({ data, thumbnailM, link, title, artistsNames, sortDescript
                 <img ref={imageRef} src={thumbnailM} alt="avatar" className="w-full h-auto rounded-lg" />
             </div>
             <div className="mt-3 text-sm">
-                <h4 className="mb-1 font-bold hover:text-main-500 cursor-pointer">{title?.length >= 33 ? `${title?.slice(0, 33)}...` : title}</h4>
+                <h4
+                    className={`mb-1 font-bold hover:text-main-500 cursor-pointer ${
+                        data?.sectionId === 'hEditorTheme' || data?.sectionId === 'hArtistTheme' ? 'hidden' : ''
+                    }`}
+                >
+                    {title?.length >= 26 ? `${title?.slice(0, 26)}...` : title}
+                </h4>
                 {releaseDateText && <h3 className="font-normal text-gray-500">{releaseDateText}</h3>}
                 <h3 className="font-normal text-gray-500">
-                    {data?.sectionId === 'h100' ? (
-                        <span>{artistsNames}</span>
-                    ) : sortDescription?.length >= 40 ? (
-                        `${sortDescription?.slice(0, 40)}...`
+                    {data?.sectionId === 'hEditorTheme' || data?.sectionId === 'hArtistTheme' ? (
+                        <span>{sortDescription}</span>
                     ) : (
-                        sortDescription
+                        <span>{artistsNames}</span>
                     )}
                 </h3>
             </div>

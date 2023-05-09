@@ -1,5 +1,5 @@
 import { useLocation, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import moment from 'moment/moment';
 import { Scrollbars } from 'react-custom-scrollbars-2';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,7 +18,7 @@ function Album() {
     const dispatch = useDispatch();
     const { pid } = useParams();
     const location = useLocation();
-
+    const ref = useRef();
     useEffect(() => {
         dispatch(actions.setCurAlbumId(pid));
         const fetchDetailPlayList = async () => {
@@ -33,7 +33,7 @@ function Album() {
 
         fetchDetailPlayList();
     }, [pid]);
-
+    // plays the random songs
     useEffect(() => {
         if (location.state?.playAlbum) {
             const randomSong = Math.round(Math.random() * playlistData?.song?.items?.length) - 1;
@@ -41,20 +41,25 @@ function Album() {
             dispatch(actions.play(true));
         }
     }, [pid, playlistData]);
+
     useEffect(() => {
         const fetchArtistData = async () => {
             const res = await apisGetArtist(playlistData?.artist?.alias);
-            console.log(res);
             if (res.data.err === 0) {
                 setArtistData(res?.data?.data);
             }
         };
         fetchArtistData();
     }, [playlistData]);
+
+    // cuộn thanh scroolbar lên đầu trang
+    useEffect(() => {
+        ref.current.scrollIntoView({ behavior: 'smooth', block: 'end', inline: 'nearest' });
+    }, []);
     return (
         <div className="w-full h-full">
             <div className="h-[70px]"></div>
-            <div className="flex w-full gap-8 px-[59px] pt-[40px]">
+            <div className="flex w-full gap-8 px-[59px] pt-[40px]" ref={ref}>
                 <div className="flex-none flex flex-col w-1/3 pb-[30px]">
                     <div className="w-full relative">
                         <div className="flex items-center justify-center">
@@ -77,7 +82,7 @@ function Album() {
                         </div>
                     </div>
                     <div className="w-full flex flex-col mt-3 items-center text-[12px] leading-[21px] text-[#696969]">
-                        <h3 className="w-[300px] flex justify-end text-xl font-bold text-[#32323d]">{playlistData?.title}</h3>
+                        <h3 className="w-[300px] flex justify-center text-xl font-bold text-[#32323d]">{playlistData?.title}</h3>
                         <div>
                             <span>Cập nhật: </span>
                             <span>{moment.unix(playlistData?.contentLastUpdate).format('DD/MM/YYYY')}</span>
@@ -103,26 +108,28 @@ function Album() {
                     </Scrollbars>
                 </div>
             </div>
-            <div className="flex flex-col px-[60px] w-full">
-                <h3 className="mb-5 text-lg font-bold">Bạn Có Thể Thích</h3>
-                <div
-                    className="w-full flex items-start
+            {artistData && (
+                <div className="flex flex-col px-[60px] w-full mt-[60px]">
+                    <h3 className="mb-5 text-lg font-bold">Bạn Có Thể Thích</h3>
+                    <div
+                        className="w-full flex items-start
                  gap-5"
-                >
-                    {artistData?.sections
-                        ?.find((item, index) => item?.sectionId === 'aReArtist')
-                        ?.items?.filter((item, index) => index <= 4)
-                        ?.map((item) => (
-                            <Artist
-                                key={item?.id}
-                                thumbnailM={item?.thumbnailM}
-                                artistName={item?.name}
-                                totalFollow={item?.totalFollow}
-                                link={item?.link}
-                            />
-                        ))}
+                    >
+                        {artistData?.sections
+                            ?.find((item, index) => item?.sectionId === 'aReArtist')
+                            ?.items?.filter((item, index) => index <= 4)
+                            ?.map((item) => (
+                                <Artist
+                                    key={item?.id}
+                                    thumbnailM={item?.thumbnailM}
+                                    artistName={item?.name}
+                                    totalFollow={item?.totalFollow}
+                                    link={item?.link}
+                                />
+                            ))}
+                    </div>
                 </div>
-            </div>
+            )}
         </div>
     );
 }

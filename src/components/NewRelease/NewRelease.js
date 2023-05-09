@@ -15,7 +15,6 @@ function NewRelease() {
         <div className="px-[59px] mt-12">
             <div className="flex mb-5 items-center justify-between ">
                 <h3 className="capitalize font-bold text-xl">{newRelease?.title}</h3>
-                <span className="text-xs">TẤT CẢ</span>
             </div>
             <div className="flex mb-4 gap-4 font-normal text-xs">
                 <Button

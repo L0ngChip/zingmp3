@@ -39,7 +39,6 @@ function Singer() {
             return number;
         }
     };
-    // console.log(singerData);
     return (
         <div className="flex gap-10 flex-col w-full relative">
             {difBackground ? (

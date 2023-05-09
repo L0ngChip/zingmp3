@@ -106,6 +106,18 @@ module.exports = {
                         transform: 'scale(1);',
                     },
                 },
+                'text-focus-in': {
+                    '0%': {
+                        '-webkit-filter': 'blur(12px)',
+                        filter: 'blur(12px)',
+                        opacity: 0,
+                    },
+                    '100%': {
+                        '-webkit-filter': 'blur(0px)',
+                        filter: 'blur(0px)',
+                        opacity: 1,
+                    },
+                },
             },
             animation: {
                 'slide-right': 'slide-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;',
@@ -116,6 +128,7 @@ module.exports = {
                 'scale-up-center': 'scale-up-center 0.3s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
                 'scale-up-image': 'scale-up-image 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
                 'scale-down-image': 'scale-down-image 0.5s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;',
+                'text-focus-in': 'text-focus-in 4s cubic-bezier(0.550, 0.085, 0.680, 0.530) both',
             },
             flex: {
                 3: '3 3 0%',

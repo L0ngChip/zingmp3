@@ -21,23 +21,25 @@ function Search() {
     const { keyword } = useSelector((state) => state.music);
     return (
         <>
-            <div className="h-[70px]"></div>
-            <div className="flex h-[50px] pl-[59px] mb-7 text-sm border-b border-gray-400 items-center">
-                <span className="pr-5 border-r border-gray-400 font-bold text-[24px]">KẾT QUẢ TÌM KIẾM</span>
-                <div className="flex font-medium text-main-text items-center">
-                    {searchMenu.map((item) => (
-                        <NavLink
-                            key={item.path}
-                            to={`${item.path}?q=${keyword.replace(' ', '+')}`}
-                            className={({ isActive }) => (isActive ? activeStyle : notActiveStyle)}
-                        >
-                            {item.text}
-                        </NavLink>
-                    ))}
+            <div className="relative w-full h-full">
+                <div className="h-[70px]"></div>
+                <div className="flex h-[50px] pl-[59px] mb-7 text-sm border-b border-gray-400 items-center">
+                    <span className="pr-5 border-r border-gray-400 font-bold text-[24px]">KẾT QUẢ TÌM KIẾM</span>
+                    <div className="flex font-medium text-main-text items-center">
+                        {searchMenu.map((item) => (
+                            <NavLink
+                                key={item.path}
+                                to={`${item.path}?q=${keyword.replace(' ', '+')}`}
+                                className={({ isActive }) => (isActive ? activeStyle : notActiveStyle)}
+                            >
+                                {item.text}
+                            </NavLink>
+                        ))}
+                    </div>
                 </div>
-            </div>
-            <div className="w-full">
-                <Outlet />
+                <div className="w-full">
+                    <Outlet />
+                </div>
             </div>
         </>
     );

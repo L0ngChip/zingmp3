@@ -10,3 +10,4 @@ export { default as Singer } from './Singer';
 export { default as SearchPlaylist } from './SearchPlaylist';
 export { default as ZingChart } from './ZingChart';
 export { default as WeekChart } from './WeekChart';
+export { default as Updating } from './Updating';

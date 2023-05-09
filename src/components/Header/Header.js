@@ -17,7 +17,6 @@ function Header() {
                     <Search />
                 </div>
             </div>
-            <div>Login</div>
         </div>
     );
 }
