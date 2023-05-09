@@ -53,7 +53,7 @@ function App() {
                     <Route path={path.PUBLIC} element={<Public />}>
                         <Route path={path.HOME} element={<Home />} />
                         <Route path={path.LOGIN} element={<Login />} />
-                        <Route path={path.MYMUSIC} element={<Personal />} />
+                        <Route path={path.MYMUSIC} element={<Updating />} />
                         <Route path={path.ALBUM_TITLE_PID} element={<Album />} />
                         <Route path={path.PLAYLIST_TITLE_PID} element={<Album />} />
                         <Route path={path.zingchart} element={<ZingChart />} />
