@@ -3,21 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 
-import {
-    Public,
-    Home,
-    Login,
-    Personal,
-    Album,
-    Search,
-    SearchSong,
-    SearchAll,
-    Singer,
-    SearchPlaylist,
-    ZingChart,
-    WeekChart,
-    Updating,
-} from '~/public/index';
+import { Public, Home, Login, Album, Search, SearchSong, SearchAll, Singer, SearchPlaylist, ZingChart, WeekChart, Updating } from '~/public/index';
 import 'react-toastify/dist/ReactToastify.css';
 import path from './utils/path';
 import * as actions from '~/redux/actions';
